@@ -1,0 +1,148 @@
+\documentclass[12pt]{article}
+
+% Math package
+% leqno means numbered equations are displayed with the numbers to the left of
+% the equations instead of to the right ("left equation numbers")
+\usepackage[leqno]{amsmath}
+
+% Geometry package for setting margins
+\usepackage{geometry}
+% Set margins
+\geometry{margin=1in}
+
+% Color package for highlighting text and array columns
+\usepackage[table]{xcolor}
+
+% Command \T now inserts a bold math t (for convenience)
+\newcommand{\T}{\mathbf{t}}
+% Command \F now inserts a bold math f (for convenience)
+\newcommand{\F}{\mathbf{f}}
+
+% Package for sans-serif font
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+
+% Package for the Aboxed command
+\usepackage{mathtools}
+
+% Package for creating equations side-by-side
+\usepackage{multicol}
+
+% Package for adding space between paragraphs
+\usepackage[skip=10pt plus1pt, indent=20pt]{parskip}
+
+% Package for changing enumerate letters
+\usepackage{enumitem}
+
+% Adding "Page {number} of {total}" in footer
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\fancyfoot[C]{
+    Page
+    \thepage\
+    of
+    {\hypersetup{linkcolor=black}\pageref{LastPage}}
+}
+\pagestyle{fancy}
+% Remove horizontal line from header
+\renewcommand{\headrulewidth}{0pt}
+
+% I'm more used to typing \infin for infinity symbol :P
+\newcommand*{\infin}{\infty}
+
+% Colors
+\usepackage{xcolor}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.92,0.92,0.92}
+\definecolor{rulecolour}{rgb}{0.5,0.5,0.5}
+
+% For code blocks
+\usepackage{listings}
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{black},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    rulecolor=\color{black},
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+\lstset{style=mystyle}
+
+% Package for diagonal fractions
+\usepackage{xfrac}
+
+% Floating images
+\usepackage{float}
+
+% Hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+% Fill table of contents lines with dots
+\usepackage{tocloft}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+% Appendix package
+\usepackage[title, titletoc]{appendix}
+
+\newcommand*{\urllink}[1]{\href{#1}{#1}}
+
+\begin{document}
+
+    % ----- Title page -----
+    \include{parts/title_page}
+
+    % Numbering i, ii, iii, ...
+    \pagenumbering{roman}
+
+    % ----- Table of contents -----
+    \include{parts/table_of_contents}
+
+    % Number 1, 2, 3, ...
+    \pagenumbering{arabic}
+
+    % Remove header text
+    \markboth{}{}
+
+    % ===== Sections =====
+
+    % ----- Introduction -----
+    \input{parts/sections/introduction}
+
+    \input{parts/sections/linux_overview.tex}
+
+    \input{parts/sections/rtos_overview.tex}
+
+    \section*{Conclusion}
+    \addcontentsline{toc}{section}{Conclusion}
+
+    \pagebreak
+
+    \include{parts/references}
+
+    \begin{appendices}
+        \section{Code}
+            \subsection{Q1.m}
+            \label{sec:q1}
+    \end{appendices}
+
+\end{document}
