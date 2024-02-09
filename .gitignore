@@ -9,3 +9,6 @@
 *.synctex.gz
 *.out
 *.toc
+
+# Rough notes
+notes.md
