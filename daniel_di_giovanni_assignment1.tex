@@ -87,6 +87,10 @@
 % Floating images
 \usepackage{float}
 
+% Package for making the "Figure #:" bold in figure captions
+\usepackage{caption}
+\captionsetup{labelfont=bf}
+
 % Hyperlinks
 \usepackage{hyperref}
 \hypersetup{
@@ -104,7 +108,11 @@
 % Appendix package
 \usepackage[title, titletoc]{appendix}
 
+% Shortcut command for making a link with the link as the text
 \newcommand*{\urllink}[1]{\href{#1}{#1}}
+
+% Shortcut command for "Figure #"
+\newcommand*{\fig}[1]{\hyperref[fig:#1]{Figure~\ref{fig:#1}}}
 
 \bibliographystyle{ieeetr}
 
