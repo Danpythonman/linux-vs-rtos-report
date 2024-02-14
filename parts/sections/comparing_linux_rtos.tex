@@ -172,3 +172,51 @@
                             \label{fig:rtai_structure}
                         \end{figure}
                 \end{itemize}
+
+            \subsubsection{Choosing Between Preemptible Kernel and Real-Time Frameworks}
+            % \subsubsection*{Choosing Between Preemptible Kernel and Real-Time Frameworks}
+            % \addcontentsline{toc}{subsubsection}{Choosing Between Preemptible Kernel and Real-Time Frameworks}
+            % Remove header text
+            \markboth{}{}
+                The fully preemptible Linux kernel and real-time Linux kernel
+                    frameworks both add real-time capabilities to the Linux
+                    kernel.
+                The fully preemptible kernel achieves this by allowing the
+                    kernel to be preempted in kernel mode and utilizing
+                    real-time data structures \cite{linux-preemption-models}.
+                However, these modifications are not enough to accommodate the
+                    needs of a hard real-time system \cite{preempt-rt-survey}.
+                At its core, the PREEMPT\_RT patch is still the Linux kernel,
+                    offering no guarantees on worst case execution time
+                    \cite{preempt-rt-survey}.
+                This approach should only be taken for soft real-time systems.
+                In this use case, the most important advantage of using the
+                    fully preemptible Linux kernel is the cost and speed of
+                    development.
+                PREEMPT\_RT Linux does not differ much from mainline Linux.
+                This allows the wealth of code for drivers and libraries in
+                    Linux to be reused---although they may need to be adapted to
+                    fit real-time needs.
+                Further, many software engineers are competent with Linux and
+                    can handle developing with the PREEMPT\_RT patch
+                    \cite{preempt-rt-survey}.
+
+                When tighter deadlines are required, a co-kernel Linux framework
+                    can be used.
+                These frameworks do have the ability to handle hard real-time
+                    requirements \cite{preempt-rt-survey}.
+                The cost of this functionality is development time and
+                    complexity.
+                Co-kernel approaches require modifications of the Linux kernel
+                    code, none of which are fully backed by the
+                    Linux community.
+                This also introduces a dependency on the specific Linux kernel
+                    version being modified, often being an older version
+                    \cite{preempt-rt-survey}.
+                The complex interaction between the two kernels introduces a
+                    level of complexity that needs to be handled by skilled
+                    real-time developers, increasing development efforts
+                    \cite{preempt-rt-survey}.
+                As a result, real-time Linux frameworks should be used only when
+                    necessary, preferring the fully preemptible kernel when
+                    timing requirements allow it.
