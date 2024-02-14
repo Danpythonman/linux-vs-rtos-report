@@ -101,9 +101,17 @@
     urlcolor=black
 }
 
-% Fill table of contents lines with dots
+% Package for table of contents
 \usepackage{tocloft}
+% Fill table of contents lines with dots
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+% --- Setting the spacing between lines in table of contents ---
+% Spacing after section
+\renewcommand\cftsecafterpnum{\vskip15pt}
+% Spacing after subsection
+\renewcommand\cftsubsecafterpnum{\vskip15pt}
+% Spacing after subsubsection
+\renewcommand\cftsubsubsecafterpnum{\vskip15pt}
 
 % Appendix package
 \usepackage[title, titletoc]{appendix}
