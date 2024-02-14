@@ -173,7 +173,7 @@
                         \end{figure}
                 \end{itemize}
 
-            \subsubsection{Choosing Between Preemptible Kernel and Real-Time Frameworks}
+            \subsubsection{Choosing Between the Preemptible Kernel and Real-Time Frameworks}
             % \subsubsection*{Choosing Between Preemptible Kernel and Real-Time Frameworks}
             % \addcontentsline{toc}{subsubsection}{Choosing Between Preemptible Kernel and Real-Time Frameworks}
             % Remove header text
@@ -220,3 +220,39 @@
                 As a result, real-time Linux frameworks should be used only when
                     necessary, preferring the fully preemptible kernel when
                     timing requirements allow it.
+
+        % Remove header text
+        \markboth{}{}
+        \subsection{Non-Linux-Based Real Time Operating Systems}
+        % \subsection*{Non-Linux-Based Real Time Operating Systems}
+        % \addcontentsline{toc}{subsection}{Non-Linux-Based Real Time Operating Systems}
+        % Remove header text
+        \markboth{}{}
+            There are many RTOSs that are not associated with the Linux kernel.
+            Some of these operating systems are open source, others are
+                commercially available.
+            They have different use cases when compared with each other, and
+                when compared with Linux-based alternatives.
+            These use cases will be presented here, along with examples of
+                non-Linux RTOSs.
+
+            \subsubsection{Advantages and Disadvantages of Non-Linux-Based Real-Time Operating Systems}
+            % \subsubsection*{Advantages and Disadvantages of Non-Linux-Based Real-Time Operating Systems}
+            % \addcontentsline{toc}{subsubsection}{Advantages and Disadvantages of Non-Linux-Based Real-Time Operating Systems}
+            % Remove header text
+            \markboth{}{}
+                The main advantage of using the Linux kernel for real time
+                    systems is the ease of development.
+                Many software engineers are familiar with Linux and can quickly
+                    learn how to use the real-time capabilities of the kernel.
+                Soft real-time systems can make use of the fully preemptible
+                    kernel, while hard real-time systems require a framework
+                    that modifies the kernel.
+                However, real-time Linux-based operating systems, whether it is
+                    the fully preemptible kernel or a real-time kernel
+                    framework, require the memory space and processing power to
+                    run a full Linux operating system.
+                This is a luxury that many embedded systems simply do not have
+                    \cite{rtos-overview}.
+                Apart from very large real-time systems, another solution is
+                    needed.
