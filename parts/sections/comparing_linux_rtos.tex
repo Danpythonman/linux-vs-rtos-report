@@ -1,5 +1,8 @@
-\section*{\sloppy Comparing Linux-Based and Real-Time Operating Systems}
-\addcontentsline{toc}{section}{Comparing Linux-Based and Real-Time Operating Systems}
+\section{\sloppy Comparing Linux-Based and Real-Time Operating Systems}
+% \section*{\sloppy Comparing Linux-Based and Real-Time Operating Systems}
+% \addcontentsline{toc}{section}{Comparing Linux-Based and Real-Time Operating Systems}
+% Remove header text
+\markboth{}{}
     RTOSs provide safety and predictability to the system they support.
     The ability to meet deadlines when responding to external events is
         necessary for hard real-time systems and crucial for soft ones.
@@ -17,8 +20,11 @@
     But first, it must be acknowledged that there is a high degree of overlap
         between the two, especially regarding soft real-time systems.
 
-        \subsection*{The Overlap Between Linux-Based and Real-Time Operating Systems}
-        \addcontentsline{toc}{subsection}{The Overlap Between Linux-Based and Real-Time Operating Systems}
+        \subsection{The Overlap Between Linux-Based and Real-Time Operating Systems}
+        % \subsection*{The Overlap Between Linux-Based and Real-Time Operating Systems}
+        % \addcontentsline{toc}{subsection}{The Overlap Between Linux-Based and Real-Time Operating Systems}
+        % Remove header text
+        \markboth{}{}
             When utilizing Linux for real-time systems, there are generally two
                 options.
             The first is to use the real-time capabilities built into the Linux
@@ -30,8 +36,9 @@
             Three such frameworks are discussed, all of which function by adding
                 a \textit{co-kernel} in a addition to the Linux kernel.
 
-            \subsubsection*{The Fully Preemptible Linux Kernel}
-            \addcontentsline{toc}{subsubsection}{The Fully Preemptible Linux Kernel}
+            \subsubsection{The Fully Preemptible Linux Kernel}
+            % \subsubsection*{The Fully Preemptible Linux Kernel}
+            % \addcontentsline{toc}{subsubsection}{The Fully Preemptible Linux Kernel}
                 The real-time features of the Linux kernel revolve around
                     \textit{preemption}---pausing a running process to run a
                     higher-priority process instead.
@@ -80,8 +87,11 @@
                     case execution times, and thus cannot be used for
                     safety-critical real-time systems \cite{preempt-rt-survey}.
 
-            \subsubsection*{Real-Time Linux Frameworks}
-            \addcontentsline{toc}{subsubsection}{Real-Time Linux Frameworks}
+            \subsubsection{Real-Time Linux Frameworks}
+            % \subsubsection*{Real-Time Linux Frameworks}
+            % \addcontentsline{toc}{subsubsection}{Real-Time Linux Frameworks}
+            % Remove header text
+            \markboth{}{}
                 Other than the fully preemptible Linux kernel, the most common
                     approach to adapting the Linux kernel to real-time
                     environments involves using a real-time framework that adds
