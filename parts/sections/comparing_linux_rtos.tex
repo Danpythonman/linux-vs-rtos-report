@@ -1,0 +1,164 @@
+\section*{\sloppy Comparing Linux-Based and Real-Time Operating Systems}
+\addcontentsline{toc}{section}{Comparing Linux-Based and Real-Time Operating Systems}
+    RTOSs provide safety and predictability to the system they support.
+    The ability to meet deadlines when responding to external events is
+        necessary for hard real-time systems and crucial for soft ones.
+    The price for this assurance is increased complexity, cost, and development
+        time.
+    Alternatively, Linux-based operating systems feature a suite of tools for
+        handling soft real-time requirements.
+    And, by virtue of the Linux kernel being open source, it can be extended to
+        further meet real-time requirements by developers with expert Linux
+        knowledge.
+    Deciding whether to switch from a Linux distribution to a RTOS involves
+        analyzing the benefits of a RTOS and balancing them with their
+        associated costs.
+    These benefits and tradeoffs between will be discussed here.
+    But first, it must be acknowledged that there is a high degree of overlap
+        between the two, especially regarding soft real-time systems.
+
+        \subsection*{The Overlap Between Linux-Based and Real-Time Operating Systems}
+        \addcontentsline{toc}{subsection}{The Overlap Between Linux-Based and Real-Time Operating Systems}
+            When utilizing Linux for real-time systems, there are generally two
+                options.
+            The first is to use the real-time capabilities built into the Linux
+                kernel.
+            One such capability is a patch to the kernel that makes it fully
+                preemptible.
+            The second option is to use a real-time framework for the Linux
+                kernel.
+            Three such frameworks are discussed, all of which function by adding
+                a \textit{co-kernel} in a addition to the Linux kernel.
+
+            \subsubsection*{The Fully Preemptible Linux Kernel}
+            \addcontentsline{toc}{subsubsection}{The Fully Preemptible Linux Kernel}
+                The real-time features of the Linux kernel revolve around
+                    \textit{preemption}---pausing a running process to run a
+                    higher-priority process instead.
+                In user-mode, any process can be preempted, transferring control
+                    to the kernel for scheduling \cite{ubuntu-real-time-part2}.
+                The preemption strategy for kernel mode is where the potential
+                    for real-time Linux lies.
+                Mainline Linux (the vanilla version of the Linux kernel not
+                    associated with any specific distribution) offers three
+                    preemption strategies for the kernel:
+                \begin{itemize}
+                    \item
+                        \textbf{PREEMPT\_NONE} forbids preemption when in
+                            kernel mode; system call returns and interrupts are
+                            the only preemption points
+                            \cite{linux-preemption-models}.
+                    \item
+                        \textbf{PREEMPT\_VOLUNTARY} allows low-priority
+                            processes to voluntarily preempt themselves when
+                            executing a system call in kernel mode
+                            \cite{ubuntu-real-time-part3}.
+                    \item
+                        \textbf{PREEMPT} makes all kernel code preemptible,
+                        except for critical sections
+                        \cite{linux-preemption-models}.
+                \end{itemize}
+
+                The fully preemptible kernel (the \textbf{PREEMPT\_RT} patch)
+                    takes preemption further.
+                This patch aimed to give Linux even more real-time capabilities.
+                Although not part of mainline Linux, this patch is backed by the
+                    Linux Foundation and is in use for real-time systems
+                    \cite{rt-linux-riscv}.
+                This preemption strategy further increases the number of
+                    preemption points in kernel code and uses more real-time
+                    data structures when handling interrupts and threads
+                    \cite{linux-preemption-models}.
+
+                The fully preemptible Linux kernel can be utilized in
+                    high-performance computing and embedded industrial
+                    environments.
+                For complex real-time systems this kernel configuration provides
+                    real-time capabilities within the familiarity of a
+                    Linux-based operating system.
+                The primary caveat is that there is no formal guarantee of worst
+                    case execution times, and thus cannot be used for
+                    safety-critical real-time systems \cite{preempt-rt-survey}.
+
+            \subsubsection*{Real-Time Linux Frameworks}
+            \addcontentsline{toc}{subsubsection}{Real-Time Linux Frameworks}
+                Other than the fully preemptible Linux kernel, the most common
+                    approach to adapting the Linux kernel to real-time
+                    environments involves using a real-time framework that adds
+                    a co-kernel to the Linux kernel.
+                The idea is to have the co-kernel working as a layer between the
+                    hardware and the Linux kernel.
+                The co-kernel is responsible for catching hardware interrupts,
+                    scheduling them as either real-time tasks or Linux tasks,
+                    and guaranteeing that real-time tasks meet their deadline.
+                Leftover CPU time is given back to the Linux kernel
+                    \cite{preempt-rt-survey}.
+
+                The most common open-source implementations of a real-time
+                    co-kernel Linux framework are RTLinux, Xenomai, and the Real
+                    Time Application Interface for Linux (RTAI).
+
+                \begin{itemize}
+                    \item
+                        \textbf{RTLinux} runs the Linux kernel as a
+                            fully-preemptible process \cite{preempt-rt-survey}.
+                        It then intercepts all hardware interrupts and schedules
+                            tasks.
+                        Shown in \fig{rtlinux_structure}, hardware interrupts
+                            not related to real-time events are passed to the
+                            Linux kernel as software interrupts, whereas
+                            real-time event interrupts are handled by the
+                            appropriate real-time interrupt service routines
+                            \cite{rt-linux-getting-started}.
+                        \begin{figure}[H]
+                            \centering
+                            \includegraphics
+                                [width=0.7\textwidth]
+                                {images/rtlinux_structure.png}
+                            \caption
+                                [Structure of RTLinux]
+                                {Structure of RTLinux \cite{rt-linux-getting-started}.}
+                            \label{fig:rtlinux_structure}
+                        \end{figure}
+                    \item
+                        \textbf{Xenomai} works by supplementing the Linux kernel
+                            with a real-time kernel running side-by-side with
+                            it \cite{xenomai-overview}.
+                        The real-time core deals with all time-critical
+                            tasks and has a higher priority than the Linux
+                            kernel.
+                        The Xenomai kernel and the Linux kernel communicate via
+                            the
+                            \textit{Adaptive Domain Environment for Operating System (ADEOS)},
+                            which separate domains for both kernels
+                            \cite{preempt-rt-survey}.
+                        This is shown in \fig{xenomai_structure}.
+                        \begin{figure}[H]
+                            \centering
+                            \includegraphics
+                                [width=0.5\textwidth]
+                                {images/xenomai_structure.jpg}
+                            \caption
+                                [Structure of Xenomai]
+                                {Structure of Xenomai \cite{preempt-rt-survey}.}
+                            \label{fig:xenomai_structure}
+                        \end{figure}
+                    \item
+                        \textbf{RTAI} uses a hardware abstraction layer (RTHAL)
+                            to get information from Linux and dispatch
+                            interrupts \cite{xenomai-overview}.
+                        This is displayed in \fig{rtai_structure}.
+                        It has few dependencies to Linux, making it easy to
+                            switch between versions of the Linux kernel
+                            \cite{xenomai-overview}.
+                        \begin{figure}[H]
+                            \centering
+                            \includegraphics
+                                [width=0.5\textwidth]
+                                {images/rtai_structure.jpg}
+                            \caption
+                                [Structure of RTAI]
+                                {Structure of RTAI \cite{preempt-rt-survey}.}
+                            \label{fig:rtai_structure}
+                        \end{figure}
+                \end{itemize}
