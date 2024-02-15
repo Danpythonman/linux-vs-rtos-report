@@ -1,3 +1,5 @@
+% Remove header text
+\markboth{}{}
 \section{\sloppy Comparing Linux-Based and Real-Time Operating Systems}
 % \section*{\sloppy Comparing Linux-Based and Real-Time Operating Systems}
 % \addcontentsline{toc}{section}{Comparing Linux-Based and Real-Time Operating Systems}
@@ -20,6 +22,8 @@
     But first, it must be acknowledged that there is a high degree of overlap
         between the two, especially regarding soft real-time systems.
 
+        % Remove header text
+        \markboth{}{}
         \subsection{The Overlap Between Linux-Based and Real-Time Operating Systems}
         % \subsection*{The Overlap Between Linux-Based and Real-Time Operating Systems}
         % \addcontentsline{toc}{subsection}{The Overlap Between Linux-Based and Real-Time Operating Systems}
@@ -36,6 +40,8 @@
             Three such frameworks are discussed, all of which function by adding
                 a \textit{co-kernel} in a addition to the Linux kernel.
 
+            % Remove header text
+            \markboth{}{}
             \subsubsection{The Fully Preemptible Linux Kernel}
             % \subsubsection*{The Fully Preemptible Linux Kernel}
             % \addcontentsline{toc}{subsubsection}{The Fully Preemptible Linux Kernel}
@@ -87,6 +93,8 @@
                     case execution times, and thus cannot be used for
                     safety-critical real-time systems \cite{preempt-rt-survey}.
 
+            % Remove header text
+            \markboth{}{}
             \subsubsection{Real-Time Linux Frameworks}
             % \subsubsection*{Real-Time Linux Frameworks}
             % \addcontentsline{toc}{subsubsection}{Real-Time Linux Frameworks}
@@ -173,6 +181,8 @@
                         \end{figure}
                 \end{itemize}
 
+            % Remove header text
+            \markboth{}{}
             \subsubsection{Choosing Between the Preemptible Kernel and Real-Time Frameworks}
             % \subsubsection*{Choosing Between Preemptible Kernel and Real-Time Frameworks}
             % \addcontentsline{toc}{subsubsection}{Choosing Between Preemptible Kernel and Real-Time Frameworks}
@@ -236,9 +246,9 @@
             These use cases will be presented here, along with examples of
                 non-Linux RTOSs.
 
-            \subsubsection{Advantages and Disadvantages of Non-Linux-Based Real-Time Operating Systems}
-            % \subsubsection*{Advantages and Disadvantages of Non-Linux-Based Real-Time Operating Systems}
-            % \addcontentsline{toc}{subsubsection}{Advantages and Disadvantages of Non-Linux-Based Real-Time Operating Systems}
+            \subsubsection{Analysis of Non-Linux-Based Real-Time Operating Systems}
+            % \subsubsection*{Analysis of Non-Linux-Based Real-Time Operating Systems}
+            % \addcontentsline{toc}{subsubsection}{Analysis of Non-Linux-Based Real-Time Operating Systems}
             % Remove header text
             \markboth{}{}
                 The main advantage of using the Linux kernel for real time
@@ -254,5 +264,79 @@
                     run a full Linux operating system.
                 This is a luxury that many embedded systems simply do not have
                     \cite{rtos-overview}.
-                Apart from very large real-time systems, another solution is
-                    needed.
+                Apart from very large systems that can take support a full Linux
+                    kernel, another solution is needed.
+
+                For hard real-time embedded systems with limited resources, a
+                    non-Linux RTOS is the only option (aside from writing
+                    bare-metal code for the hardware without an operating
+                    system).
+                Commercial RTOSs are the most popular choice for this scenario.
+                These are RTOSs developed and maintained by a private company.
+                While they have a high up-front cost, and may even charge
+                    royalties for deployment of the system, they alleviate
+                    in-house development costs and provide a high level of
+                    trust \cite{rtos-overview}.
+                Open-source RTOSs also exist, allowing access to the source code
+                    of the operating system.
+                Although the source code is freely obtained, long-term support
+                    is often needed and must be purchased \cite{rtos-overview}.
+                This support can come from the maintainers and user community of
+                    the operating system, or from hired software engineers.
+                To further add to the cost, low-level development tools are
+                    often needed to work with these RTOSs and must be purchased
+                    for the engineers \cite{rtos-overview}.
+
+                Choosing an RTOS is a technical decision that must take into
+                    account the system requirements and timing deadlines that
+                    the operating system must be able to handle.
+                This information must be balanced with the cost of purchasing
+                    and maintaining the system, which will introduce a cost
+                    whether the engineers are hired or not.
+                Ultimately, the decision is very specific to the situation being
+                    addressed and requires expertise and careful thought.
+
+            \subsubsection{Examples of Non-Linux-Based Real-Time Operating Systems}
+            % \subsubsection*{Examples of Non-Linux-Based Real-Time Operating Systems}
+            % \addcontentsline{toc}{subsubsection}{Examples of Non-Linux-Based Real-Time Operating Systems}
+            % Remove header text
+            \markboth{}{}
+                Before concluding, some examples of non-Linux RTOSs will be
+                    discussed to provide a more detailed view of the real-time
+                    software ecosystem.
+
+                \begin{itemize}
+                    \item
+                        \textbf{VxWorks} is a commercial RTOS that is the most
+                            popular in the embedded industry
+                            \cite{rtos-overview}.
+                        Some notable uses of VxWorks include the Mars Curiosity
+                            rover \cite{vsworks-curiosity} and the International
+                            Space Station \cite{rtos-overview}.
+                        VxWorks supports many development hosts and can run on
+                            all popular CPU platforms.
+                    \item
+                        \textbf{Embedded Configurable Operating System (eCos)}
+                            is the most popular open source RTOS.
+                        \sloppy It provides a configuration tool available in
+                            both graphical and command-line formats to specify
+                            the system's requirements \cite{rtos-overview}.
+                        The focus of eCos is on configurability.
+                        It can scale from extremely small memory-constrained
+                            systems to large systems with complex functionality
+                            \cite{ecos-overview}.
+                        There are fewer supported development hosts and CPU
+                            platforms with eCos than with VxWorks, but it still
+                            offers the expected operating system functionality
+                            and real-time capabilities \cite{rtos-overview}.
+                    \item
+                        \textbf{HartOs} is a research project that is attempting
+                            to implement a RTOS at the hardware level
+                            \cite{hartos}.
+                        HartOs's goal is to sidestep the computational overhead
+                            and memory footprint associated with software RTOSs
+                            while increasing the flexibility and capabilities of
+                            hardware RTOSs \cite{hartos}.
+                        While not fully complete, HartOs is an innovation in the
+                            development of hardware-based RTOSs.
+                \end{itemize}
